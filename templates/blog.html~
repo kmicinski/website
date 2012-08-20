@@ -1,6 +1,0 @@
-<h3>$title$</h3>
-<p><i>Authored: $date$</i><br/>
-  <span>Tags:</span> $post_tags$
-</p>
-
-<p>$body$
