@@ -1,0 +1,9 @@
+var possiblePics = ["car.jpg", "desk.jpg", "pic_mnt.jpg", "picture.jpg", "texasstuff.jpg", "window.jpg",
+  "matt.jpg", "snowman.jpg", "micro.jpg"]
+
+function load()
+{
+  a = new Image();
+  a.src = possiblePics[Math.floor(Math.random() * possiblePics.length)];
+  document['profilepic'].src = a.src;
+}

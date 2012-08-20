@@ -1,0 +1,124 @@
+<html>
+<head>
+<title>Kristopher Micinski -- The lambda calculus</title>
+</head>
+<body bgcolor="#330F0F" text="#FFFFFF" alink="#FFCC00" link="#FFCC00">
+<font size="+4" color="#FFCC00">Kristopher Micinski</font><br>
+<font size="+1" color="#FFCC00">A homepage of math, computer science, engineering, and related interesting things</font><br>
+<table width="50%" align="left">
+<td><a href="articles.html">Articles</a></td>
+<td><a href="bio.html">Bio</a></td>
+<td><a href="books.html">Books</a></td>
+<td><a href="programming.html">Programming</a></td>
+<td><a href="lectures.html">Lectures</a></td>
+</table><br><br>
+<table width="60%" align="center">
+<tr><td>
+<font size = "+3">The lambda calculus</font>
+<br>
+<font size = "+1">Alternatively: How to build the universe out of a bunch of parenthesis and lambdas</font>
+<br>
+<font size = "+1">By: Kristopher Micinski</font>
+<br><br>
+<b>Introduction:</b><br>
+	In this document, I present a definition of how a very simple system – the lambda calculus – can be used to compute a great many things (in fact, all things which are computable by other programming languages) in computer science. I give a brief, high level overview of the definition of Turing completeness, the history of functional programming languages, and their possible applications in the “real world.”
+<br><br>
+<b>What types of languages are out there / What kinds of things are computable?</b>
+<br><p>	I assume you know a bit of programming, either in C, C++, Python, Java, or one of the other common C descendents. These languages are used very highly in industry today, and it makes a great deal of sense to teach our students these languages as practical tools that will be indispensible to their day-to-day jobs in the future. But for just a little while, I implore that you forget all of the niceties of your individual comfort zone, and stop to think about why these languages work they way they do.</p>
+<br>
+<ul>
+<li>The maintenance of <b>state</b>. Whenever you are programming in a standard language you assume that the entire time, you maintain a sense of state. That is, there is some environment out there which holds a bunch of values. For example, say you write a C program such as this one:
+<pre>
+int c = 1;
+
+void print_inc_c(void) {
+	printf("%d\n", c++);
+	return;
+}
+</pre>
+There is always a value (namely, c) “floating out there” in memory somewhere.
+<li>A <b>linear</b> execution model. Because your program assumes that it maintains state, your code is executed one line at a time. So, the code “runs down the page,” as the values and state of the environment changes the whole time.
+<li>A heavy notion of <b>side effects</b>. Many times, a function in a computer program is used to do something which does not resemble the strict definition of a mathematical function at all. This also has to do with the program maintaining an element of state. Many compilers can optimize code very well, assuming they have an amount of information about the code. For example, let us consider the following code
+<pre>
+while(locked) {
+	if (!locked) {
+		locked = 1;
+		break;
+	} else {
+		sleep(wait_time);
+	}
+}
+</pre>
+Note that this isn't sane code in any sense, especially with much better thread synchronization now existing. However, note that -- assuming we know nothing about sleep other than the fact that it is a function -- it seems that the function sleep is called more times than we need it to be, why don't we just "factor it out" of the loop? If sleep did indeed behave as a standard function in the mathematical sense we could indeed do this (and indeed! Good compilers will do what is called loop invariant code motion to take care of these situations). However, because the sleep function behaves as a way to act on the external state of the program, we cannot do this.
+</ul>
+It is funny, in fact, that we even call these things "functions" at all. Many lanagues will be more proper and call these objects "procedures." This is, in truth, a much better term given their potentially state changing behavior.
+<p><b>Advantages of using an imperative language</b>
+<p>So, what's so bad about maintaining state in our programs? In one sense, <i>nothing</i>. In fact, you will see that the majority of lanagues in use today are actually those which carry state around. Why is this? Well, there are a few possible explanations:
+<ul>
+<li><b>Imperative / procedure based languages translate very easily and readily into machine code.</b>Anyone who has taken a course on assembler programming knows that the machine carries a number of instructions which map the instructions from C directly into a number of blocks of code and jumps to and from them. So it makes sense that, because we execute our code on real hardware, we should want a language which conveys a simmilar execution model.
+<li><b>Fairly simple to learn.</b> Although it could be argued that, because imperative languages have to employ a number of "hacks" to get around common problems in mathematics, once you have the strategy down it makes a lot of sense. Extending common idioms to new problems is often trivial. Common idioms involve looping through a sequence, traversing a tree, infinite loops, and nested if statements.
+<li><b>Commonly used languges are often imperative.</b> This issue is actually probably the biggest barrier to using less common (though perhaps slightly more sophisticated) languages. I mean, I won't try to lie to you, there is already a <i>massive</i> amount of code out there to do basically anything you might want by simply patching together some provided library code you can download right off the net in just a few seconds. Often these large libraries even have sizable development communities, so you might just go out on an IRC channel and ask for help with some topic with which you're having a hard time.
+<li><b>Other languages are often based on mathematics.</b> For some reason, mathematics seems to scare people. I will not say that this is completely without reason. Several topics in newer, functional langauges are legitamately difficult to understand. However, I firmly believe that once these topics are learned they make much more sense than the standard C idioms.
+</ul>
+<p><b>Lambda calculi: computing with a few simple operations</b>
+<p>So, how might we want to operate instead of using these more traditional programming operations? I will now lay the groundwork for what is called the Lambda calculus. You might be scared off by this title, however it is actually quite a simple mathematical system. Note that the lambda calculus has nothing to do with the integral or differential calculus. There are many different calculi which exist for solving different problems. To put it simply, the lambda calculus is simply a system for specifying how things can be computed. Before we begin, I would like to enlighten you on a few concepts:
+<ul>
+<li>Generally in what follows we use <i>prefix</i> notation instead of infix notation when we talk about mathematical expressions. This isn't really a change at all when it comes to the actual way we compute things, it's simply a notational convience so we can act like operators such as + and * are functions. For example, consider the following infix expression:
+<pre>
+20 * 2 + 2 * (1 + 3)
+</pre>
+The same thing in prefix notation could be written:
+<pre>
++(*(20,2),*(20,+(1,3)))
+or
+(+ (* 20 2) (* 20 (+ 1 3)))
+in standard LISP syntax.
+</pre>
+<li>To <i>apply</i> a function means to evaluate that function (partially or fully) on an argument. You may ask how we can "partially" evaluate the operator +. If you view the function + as a function which takes two arguments, x and y, + 3 2 = 5. However, you can also <i>partially</i> evaluate the function +, so that + 3 evaluates to a function of <b>one</b> variable (argument). So, say we let the function f = + 3, now if we apply f to the value 5, we will get f 5 = + 3 5 = 8 as expected. This partial evaluation is very important in the lambda calculus, as it allows us not only to pass around standard values, such as numbers, but we can also pass around functions!
+<li>Note that, for typing purposes (as well as the program I present later) I use the character "\" to represent a lambda character. Note that in standard textbooks, you will often see these charcters as the Greek letter lambda.
+</ul>
+So what is this lambda business? Well, it is actually quite simple. We have a number of basis terms: constants and variables. We then have <i>lambda abstractions</i>. A lambda is something that represents a function. Here is an example of a lambda abstraction (think <b>function</b>!):
+<pre>
+(\x. + x 1)
+</pre>
+We "apply" functions to arguments by replacing all occurances of the variable bound by the lambda in the lambda abstraction with the argument of the function and dropping the lambda. So, for example:
+<pre>
+(\x. + x 1) 5 <=>
+
+[Now, replace x (the variable bound by the lambda) with the argument 5]
+
+(+ 5 1) <=>
+6
+</pre>
+There are also a few functions which I will be using throughout this document to describe some enriched behavior:
+<ul>
+<li>Numeric constants, as well as true and false
+<li>Standard arithmetic operators (such as +, -, *, and /) which all take two arguments. For example (- 3 2) = 1
+<li>The standard logic combination operators AND and OR, both taking two arguments. These are defined such that AND true true = true, otherwise false, and OR false false = false, otherwise true.
+<li>The IF function, which takes three arguments. If the first argument is true, the function evaluates its second argument, otherwise the function evaluates to its third argument. For example IF true 3 4 = 3 and IF false 3 4 = 4.
+<li>The list three list construction operators: CONS, CAR, CDR, and NIL. These are foreign functions for people used to programming in C like languages, where lists are at best data structures. The CONS function creates a list out of a value (its first argument) and a list (its second argument). A list <b>must</b> terminate with the value NIL. So, to make the list [1,2,3], you would use CONS(1,CONS(2,CONS(3,NIL))). See, it's like those russian dolls stacked inside each other. The function CAR returns the head of a list, CDR the tail. So, CAR(CONS(1,NIL)) = 1, and CDR(CONS(1,CONS(2,NIL))) = CONS(2,NIL).
+</ul>
+<p><b>Downloading and installing 'lambdakit'</b>
+<p>I have prepared a special interpreter for the lambda calculus for this tutorial, which I call "lambdakit." Lambdakit is written in a functional language named Standard ML (which I hope this tutorial will convince you to use).
+<p><b>Formal definition of a lambda term</b>
+<p>We now define a lambda term. A lambda expression can be:
+<ul>
+<li>A variable
+<li>A constant value
+<li>An application of a lambda function: (lambda-expression) lambda-expression
+<li>A lambda abstraction: \var. lambda-expression
+<li>A mathematical operator: op (lambda-expression)* [read: one or more lambda-expressions]
+</ul>
+
+<p><b>Equivalent formulas in the lambda calculus</b>
+<p>Consider the two expressions:
+<pre>
+(\x. + x 1) 3 = (+ 3 1) = 4
+and
+(\y. + y 1) 3 = (+ 3 1) = 4
+</pre>
+It is obvious that the two formulas (\x. + x 1) and (\y. + y 1) are <i>equivalent</i>. We would like to formalize exactly which expressions are equivalent to each other. The first conversion rule I introduce is called alpha-conversion
+</td></tr>
+</table>
+</body>
+</html>

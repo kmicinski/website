@@ -1,0 +1,88 @@
+p {
+    font-family: 'Crimson Text', serif;
+    font-size:1.1em;
+}
+
+@import url(http://fonts.googleapis.com/css?family=Crimson+Text);
+
+a.toplinks {
+   color:#ffcc00;
+   font-size:1.2em;
+}
+
+body {
+    
+}
+
+.tag {
+    border: 2 dashed #6a98b3;
+    font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;
+    font-size: .8em;
+    font-weight: bold;
+    background: c2deef;
+    color: 330000;
+/*    margin:0;
+    border:0;*/
+    padding:2;
+    display:inline;
+}
+
+.rightalignfigure {
+    float:right;
+    width: 250px;
+    display: block;
+    margin:10px;
+}
+
+.leftalignfigure {
+    float:left;
+    width:350px;
+    display: block;
+    margin:10px;
+}
+
+h2 {
+   font-size:1.8em;
+   margin:0;
+   border:0;
+   padding:0;
+}
+
+.logopix {
+    height: 35px;
+}
+
+h3 {
+   font-size:1.4em;
+   margin:0;
+   border:0;
+   padding:0;
+}
+
+li {
+    font-family: 'Crimson Text', serif;
+    font-size:1.1em;
+}
+
+p.title {
+    font-family:'Crimson Text', serif;
+    font-size:4em;
+    color:#ffcc00;
+    margin:0;
+    border:0;
+    padding:0;
+}
+
+p.subtitle {
+    font-size:1.4em;
+    color:#ffcc00;
+    margin:0;
+    border:0;
+    padding:0;
+}
+
+#maincontainer{ 
+width: 840px; /*Width of main container*/ 
+margin: 0
+auto; /*Center container on page*/ 
+}
