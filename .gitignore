@@ -1,0 +1,8 @@
+/_site/*
+/_cache/*
+hakyll
+hakyll.hi
+hakyll.o
+*~
+/.project
+/.dist-buildwrapper/*

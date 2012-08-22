@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>A tiny Prolog implementation -- Kristopher Micinski</title>
+</head>
+<body
+ style="background-color: rgb(51, 15, 15); color: rgb(255, 255, 255);"
+ link="#ffcc00" alink="#ffcc00">
+<font size="+4" color="#ffcc00">Kristopher Micinski</font><br>
+<font size="+1" color="#ffcc00">A homepage of math, computer science,
+engineering, and related interesting things</font><br>
+<table width="60%" align="left">
+  <tbody>
+    <tr>
+      <td><a href="articles.html">Articles</a></td>
+      <td><a href="bio.html">Bio</a></td>
+      <td><a href="consulting.html">Consulting</a></td>
+      <td><a href="programming.html">Programming</a></td>
+      <td><a href="lectures.html">Lectures</a></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<br>
+<table width="60%" align="center">
+  <tbody>
+    <tr>
+      <td><font size="+1">A tiny ML Prolog implementation</font>
+      <p>During my freshman year at my university, I implemented a
+variant of prolog for a class project. I called it MSU Prolog at the
+time, but it's not really a university endorsed project anymore so I
+planned to just release the source so all could experiment with the
+workings of a Prolog implementation. The code is written in Standard
+ML, and the parser and lexer are home-brewed (now I'm mostly trying to
+use lex and yacc like tools), but I think they make sense if you read
+through them. The main code of the interpreter is actually only around
+300 lines (see interpreter.ml)! The unification algorithm used is also
+very simplistic (modern prolog implementations offer many shortcuts and
+enhancements to exploit certain properties of Prolog). This was written
+when I hadn't done a lot of ML for quite some time, and MLs still a
+language I'm learning to use, so the code lacks an organized style, but
+you might still find it interesting if you're working on a simmilar
+project. The code is now released in the public domain. </p>
+      <p><b>Downloads:</b> </p>
+      <p><a href="msuprolog.tar">MSU Prolog package</a> </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>
