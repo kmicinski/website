@@ -141,8 +141,7 @@ different side of viewing datatypes and computation.  Most datatypes
 that we work with also have an analogue that can be thought of as a
 "lazy" type, sometimes the silver bullet in implementing elegant
 algorithms, amortized bounds, or cute programming tricks (as in Chris
-Okasaki's [Purely Functional Data Structures]
-(http://www.amazon.com/Purely-Functional-Structures-Chris-Okasaki/dp/0521663504).
+Okasaki's [Purely Functional Data Structures](http://www.amazon.com/Purely-Functional-Structures-Chris-Okasaki/dp/0521663504).
 
 Another thing which I've always been fascinated is the idea that
 we can represent computation over arbitrarily sized things with finite
@@ -190,12 +189,11 @@ To actually learn about coinduction by analogy to familiar programming
 structures, you might learn about lazy data structures, or lazy
 *languages*:
 
-- Chris Okasaki's [Purely Functional Data Structures]
-(http://www.amazon.com/Purely-Functional-Structures-Chris-Okasaki/dp/0521663504)
+- Chris Okasaki's [Purely Functional Data Structures](http://www.amazon.com/Purely-Functional-Structures-Chris-Okasaki/dp/0521663504)
 book contains a number of interesting data structures that rely
 heavily on the use of laziness to guarantee their amortized bounds.
 
-- The [Haskell wiki book] (http://en.wikibooks.org/wiki/Haskell)
+- The [Haskell wiki book](http://en.wikibooks.org/wiki/Haskell)
 always has interesting things to say about the language, as well as
 the archives of the actual Haskell wiki and mailing list.
 
