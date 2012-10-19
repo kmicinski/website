@@ -3,12 +3,18 @@ title: On being smart, and being lazy
 tags: blog,life
 --
 
-The last few weeks have been pretty busy, in a frustrating sort of
-way.  One thing that I sort of miss from my undergrad days were the
-ability to really focus on learning material in my classes, doing
-great on exams, and feeling satisfied or fulfilled in my life.  I
-haven't been able to do this lately, and I tried to think about what
-was causing the issue.  
+Full disclosure, you probably shouldn't read this if you're hoping for
+deep technical insights, this is mostly random musing.  But in the
+next few weeks I hope to have both posts on higher order intents
+(messages for Android) and writing compilers for functional langauges
+(as I spend more time thinking about this in preparing a small amount
+of lecture material for my advisor's class, promise I won't go
+overboard, Jeff!)  The last few weeks have been pretty busy, in a
+frustrating sort of way.  One thing that I sort of miss from my
+undergrad days were the ability to really focus on learning material
+in my classes, doing great on exams, and feeling satisfied or
+fulfilled in my life.  I haven't been able to do this lately, and I
+tried to think about what was causing the issue.
 
 At some level I knew that being an undergrad was defined by an
 arbitrary measure of success.  What do I mean?  Well, as an undergrad,
