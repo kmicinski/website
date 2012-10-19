@@ -6,3 +6,5 @@ hakyll.o
 *~
 /.project
 /.dist-buildwrapper/*
+#*
+.#*
